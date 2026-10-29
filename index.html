@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Smart Tools - 15-in-1 Web Utilities</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F4F6F9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header-container {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .adsense-banner {
+            background-color: #EAEAEA;
+            border: 1px dashed #999;
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 25px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .tab-btn {
+            background-color: #f1f3f5;
+            border: 1px solid #dee2e6;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            color: #495057;
+        }
+        .tab-btn:hover {
+            background-color: #e9ecef;
+        }
+        .tab-btn.active {
+            background-color: #007BFF;
+            color: white;
+            border-color: #007BFF;
+        }
+        .tool-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 650px;
+            box-sizing: border-box;
+            display: none;
+        }
+        .tool-card.active {
+            display: block;
+        }
+        h2 {
+            text-align: center;
+            color: #212529;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        textarea, input[type="date"], input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        button.action-btn {
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        button.action-btn:hover {
+            background-color: #0056b3;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #007BFF;
+            border-radius: 4px;
+            font-size: 15px;
+            color: #333;
+            word-break: break-all;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .flex-row {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+    <!-- Essential Online External Scripts -->
+    <script src="https://cloudflare.com"></script>
+    <script src="https://cloudflare.com"></script>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>My Smart Tools</h1>
+        <div class="adsense-banner">Google AdSense Banner (Top)</div>
+        
+        <!-- Navigation Tabs for 15 Tools -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTool('word-counter')">📝 Word Counter</button>
+            <button class="tab-btn" onclick="openTool('age-calculator')">📅 Age Calc</button>
+            <button class="tab-btn" onclick="openTool('password-gen')">🔑 Password Gen</button>
+            <button class="tab-btn" onclick="openTool('pdf-tool')">📄 PDF Merge</button>
+            <button class="tab-btn" onclick="openTool('hash-gen')">🔒 Hash Gen</button>
+            <button class="tab-btn" onclick="openTool('img-compressor')">🖼️ Compress Img</button>
+            <button class="tab-btn" onclick="openTool('meta-analyzer')">🔍 Meta Analyzer</button>
+            <button class="tab-btn" onclick="openTool('lorem-gen')">✍️ Lorem Ipsum</button>
+            <button class="tab-btn" onclick="openTool('img-resizer')">📐 Social Resizer</button>
+            <button class="tab-btn" onclick="openTool('case-converter')">🔠 Case Convert</button>
+            <button class="tab-btn" onclick="openTool('percentage-calc')">📊 Percentage</button>
+            <button class="tab-btn" onclick="openTool('qr-generator')">📱 QR Gen</button>
+            <button class="tab-btn" onclick="openTool('random-num')">🎲 Random Num</button>
+            <button class="tab-btn" onclick="openTool('url-slug')">🔗 URL Slug</button>
+            <button class="tab-btn" onclick="openTool('base64-tool')">🔏 Base64 Encode</button>
+        </div>
+    </div>
+
+    <!-- 1. WORD COUNTER -->
+    <div id="word-counter" class="tool-card active">
+        <h2>Free Word & Character Counter</h2>
+        <textarea id="text-input" rows="6" placeholder="Type or paste text here..." oninput="countText()"></textarea>
+        <div class="result-box" style="font-weight: bold; border-color: #28a745;">
+            Words: <span id="word-count">0</span> | Characters: <span id="char-count">0</span>
+        </div>
+    </div>
+
+    <!-- 2. AGE CALCULATOR -->
+    <div id="age-calculator" class="tool-card">
+        <h2>Exact Age Calculator</h2>
+        <input type="date" id="dob">
+        <button class="action-btn" onclick="calculateAge()">Calculate Age</button>
+        <div id="age-result" class="result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 3. PASSWORD GENERATOR -->
+    <div id="password-gen" class="tool-card">
+        <h2>Secure Password Generator</h2>
+        <label>Length: <span id="length-val">12</span></label>
+        <input type="range" id="pass-length" min="6" max="30" value="12" style="width:100%; margin: 10px 0;" oninput="document.getElementById('length-val').innerText=this.value">
+        <div class="checkbox-group">
+            <label><input type="checkbox" id="inc-uppercase" checked> Upper (A-Z)</label>
+            <label><input type="checkbox" id="inc-lowercase" checked> Lower (a-z)</label>
+            <label><input type="checkbox" id="inc-numbers" checked> Numbers (0-9)</label>
+            <label><input type="checkbox" id="inc-symbols" checked> Symbols (@#$%)</label>
+        </div>
+        <button class="action-btn" onclick="generatePassword()">Generate Password</button>
+        <input type="text" id="generated-password" readonly placeholder="Your Secure Password" style="text-align: center; font-weight: bold; background: #F8F9FA;">
+    </div>
+
+    <!-- 4. PDF UTILITIES -->
+    <div id="pdf-tool" class="tool-card">
+        <h2>PDF Utilities</h2>
+        <input type="file" id="pdf-files" multiple accept="application/pdf">
+        <button class="action-btn" onclick="processPDF()">Merge PDFs</button>
+        <div id="pdf-result" class="result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 5. HASH GENERATOR -->
+    <div id="hash-gen" class="tool-card">
+        <h2>Secure Text Hash Generator</h2>
+        <textarea id="hash-string" rows="3" placeholder="Enter text to hash..."></textarea>
+        <select id="hash-algo">
+            <option value="MD5">MD5</option>
+            <option value="SHA1">SHA-1</option>
+            <option value="SHA256">SHA-256</option>
+            <option value="SHA512">SHA-512</option>
+        </select>
+        <button class="action-btn" onclick="generateHash()">Generate Hash</button>
+        <div id="hash-output" class="result-box" style="display:none; font-family: monospace;"></div>
+    </div>
+
+    <!-- 6. IMAGE COMPRESSOR -->
+    <div id="img-compressor" class="tool-card">
+        <h2>Image Compressor</h2>
+        <input type="file" id="compress-file" accept="image/*">
+        <label>Quality: <span id="quality-val">70%</span></label>
+        <input type="range" id="compress-quality" min="10" max="100" value="70" oninput="document.getElementById('quality-val').innerText=this.value+'%'">
+        <button class="action-btn" onclick="compressImage()">Compress & Download</button>
+        <div id="compress-status" class="result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 7. META TAG ANALYZER -->
+    <div id="meta-analyzer" class="tool-card">
+        <h2>Meta Tag Analyzer</h2>
+        <textarea id="meta-input" rows="5" placeholder="Paste HTML Source code..."></textarea>
+        <button class="action-btn" onclick="analyzeMetaTags()">Analyze Tags</button>
+        <div id="meta-output" class="result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 8. LOREM IPSUM GENERATOR -->
+    <div id="lorem-gen" class="tool-card">
+        <h2>Lorem Ipsum Generator</h2>
+        <div class="flex-row">
+            <input type="number" id="lorem-count" min="1" max="50" value="3">
+            <select id="lorem-type">
+                <option value="paragraphs">Paragraphs</option>
+                <option value="words">Words</option>
+            </select>
+        </div>
